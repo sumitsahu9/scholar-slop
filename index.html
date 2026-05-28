@@ -43,7 +43,13 @@
     <!-- Header -->
     <header class="app-header">
         <div class="container header-flex">
-            <h1 class="logo" onclick="app.showHome()">🎓 Scholar Slop</h1>
+            <div class="logo-wrapper" onclick="app.showHome()" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                <h1 class="logo" style="margin: 0;">🎓 Scholar Slop</h1>
+                <span class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Live Portal</span>
+                </span>
+            </div>
             <div class="header-actions">
                 <button class="btn-icon btn-saved" onclick="app.showDashboard()" aria-label="My Saved Scholarships">
                     🔖
