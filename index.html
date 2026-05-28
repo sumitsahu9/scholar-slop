@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- Primary SEO Meta Tags -->
+    <title>Scholar Slop | Discover & Apply for Verified Scholarships</title>
+    <meta name="description" content="Discover, track, and apply for official and verified government, state, and private scholarships. Simplify your academic funding search today.">
+    <meta name="keywords" content="scholar slop, government scholarships, student financial aid, college scholarships, study grants, education funding, verified scholarships">
+    <meta name="author" content="Scholar Slop Portal">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://scholarslop.org">
+    <meta property="og:title" content="Scholar Slop | Discover & Apply for Verified Scholarships">
+    <meta property="og:description" content="Find and track verified government and public scholarships tailored to your academic profile. Simplify your financial aid search today!">
+    <meta property="og:image" content="assets/og-image.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://scholarslop.org">
+    <meta name="twitter:title" content="Scholar Slop | Discover & Apply for Verified Scholarships">
+    <meta name="twitter:description" content="Find and track verified government and public scholarships tailored to your academic profile. Simplify your financial aid search today!">
+    <meta name="twitter:image" content="assets/og-image.png">
+
+    <!-- Favicon and Icons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png">
+    <link rel="shortcut icon" href="assets/favicon.png" type="image/x-icon">
+    <link rel="apple-touch-icon" href="assets/favicon.png">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/temp_style_append.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="app-header">
+        <div class="container header-flex">
+            <h1 class="logo" onclick="app.showHome()">🎓 Scholar Slop</h1>
+            <div class="header-actions">
+                <button class="btn-icon btn-saved" onclick="app.showDashboard()" aria-label="My Saved Scholarships">
+                    🔖
+                    <span id="saved-count" class="badge-count" style="display: none;">0</span>
+                </button>
+                <button id="dark-mode-toggle" class="btn-icon" onclick="app.toggleDarkMode()"
+                    aria-label="Toggle Dark Mode">
+                    <span class="icon-sun">☀️</span>
+                    <span class="icon-moon">🌙</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main id="app-content" class="container">
+        <!-- Views will be injected here by app.js -->
+    </main>
+
+    <!-- Templates -->
+
+    <!-- Home View Template (Gateway Hub) -->
+    <template id="view-home">
+        <section class="hero-section">
+            <h2>&#127891; Discover Verified Scholarships Matched to You</h2>
+            <p>Enter your academic details below to instantly match with official state, central, and private scholarships. We cross-reference verified government registries to simplify your search for financial aid.</p>
+        </section>
+
+        <!-- Eligibility Form Block -->
+        <section class="search-container card">
+            <div class="form-group">
+                <label for="input-name">Full Name</label>
+                <input type="text" id="input-name" placeholder="e.g. Rahul Kumar">
+            </div>
+
+            <div class="form-group">
+                <label for="filter-state">Domicile State</label>
+                <input type="text" id="filter-state" list="state-list" placeholder="Search or Select State"
+                    autocomplete="off">
+                <datalist id="state-list">
+                    <!-- Options populated by JS -->
+                </datalist>
+            </div>
+
+            <div class="form-group">
+                <label for="filter-category">Category</label>
+                <select id="filter-category">
+                    <option value="">Select Category</option>
+                    <option value="General">General</option>
+                    <option value="SC">SC</option>
+                    <option value="ST">ST</option>
+                    <option value="OBC">OBC</option>
+                    <option value="Minority">Minority</option>
+                </select>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="filter-education">Education Level <span class="optional">(Optional)</span></label>
+                    <select id="filter-education">
+                        <option value="">Select Level</option>
+                        <option value="Class 10">Class 10</option>
+                        <option value="Class 12">Class 12</option>
+                        <option value="Diploma">Diploma</option>
+                        <option value="UG">Undergraduate (UG)</option>
+                        <option value="PG">Postgraduate (PG)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="filter-income">Annual Family Income <span class="optional">(Optional)</span></label>
+                    <input type="number" id="filter-income" placeholder="e.g. 250000" min="0" step="1000">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="filter-institute">Institute Type <span class="optional">(Optional)</span></label>
+                <select id="filter-institute">
+                    <option value="">Select Type</option>
+                    <option value="Government">Government</option>
+                    <option value="Private">Private</option>
+                    <option value="Both">Both / Any</option>
+                </select>
+            </div>
+
+            <p class="form-notice">&#128161; Pro Tip: Filling out optional fields helps filter out ineligible options and matches you with higher precision.</p>
+
+            <button class="btn btn-primary btn-block" onclick="app.handleOnboarding()">Check My Eligibility Now &rarr;</button>
+        </section>
+
+        <!-- Trust & Legitimacy Section -->
+        <section class="trust-section">
+            <div class="trust-grid">
+                <div class="trust-item">
+                    <span class="trust-icon">&#10004;&#65039;</span>
+                    <p><strong>100% Verified Sources:</strong> Details are compiled directly from official state and central government portals to ensure absolute accuracy.</p>
+                </div>
+                <div class="trust-item">
+                    <span class="trust-icon">&#128274;</span>
+                    <p><strong>Secure &amp; Direct:</strong> We never handle your applications. We guide you directly to the official government portals to submit your applications safely.</p>
+                </div>
+                <div class="trust-item">
+                    <span class="trust-icon">&#10004;&#65039;</span>
+                    <p><strong>Regularly Updated:</strong> Scholarship deadlines, benefit amounts, and eligibility criteria are synchronized with public source directories.</p>
+                </div>
+            </div>
+            <p class="trust-disclaimer">
+                "This is an independent platform created to help students discover government and public scholarships. We are not affiliated with or endorsed by any government authority."
+            </p>
+        </section>
+
+        <aside class="privacy-notice">
+            <p>&#128737;&#65039; <strong>Zero Server Storage:</strong> Your profile data (income, category, domicile) is saved locally on your device and is never uploaded, shared, or sent to any server.</p>
+        </aside>
+
+        <!-- NEW SECTION: Featured Categories Gateway -->
+        <section class="section gateway-section">
+            <h3 class="section-title">Explore Verified Scholarship Directories</h3>
+            <p class="section-subtitle">Browse dedicated directories categorized for targeted discovery and crawl indexation.</p>
+            
+            <div class="gateway-container">
+                <div class="gateway-group">
+                    <h4>State-Based Directories</h4>
+                    <div class="gateway-grid">
+                        <a href="mp-scholarship/index.html" class="gateway-card">
+                            <span class="card-icon">&#128205;</span>
+                            <h5>Madhya Pradesh</h5>
+                            <p>MPTAAS, MMVY, and rural daughter schemes.</p>
+                            <span class="card-cta">Explore &rsaquo;</span>
+                        </a>
+                        <a href="maharashtra-scholarship/index.html" class="gateway-card">
+                            <span class="card-icon">&#128205;</span>
+                            <h5>Maharashtra</h5>
+                            <p>MahaDBT welfare benefit portals.</p>
+                            <span class="card-cta">Explore &rsaquo;</span>
+                        </a>
+                        <a href="uttar-pradesh-scholarship/index.html" class="gateway-card">
+                            <span class="card-icon">&#128205;</span>
+                            <h5>Uttar Pradesh</h5>
+                            <p>UP pre/post matric scholarship portals.</p>
+                            <span class="card-cta">Explore &rsaquo;</span>
+                        </a>
+                        <a href="west-bengal-scholarship/index.html" class="gateway-card">
+                            <span class="card-icon">&#128205;</span>
+                            <h5>West Bengal</h5>
+                            <p>Oasis, SVMCM, and Kanyashree aid.</p>
+                            <span class="card-cta">Explore &rsaquo;</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="gateway-group">
+                    <h4>Category &amp; Special Groups</h4>
+                    <div class="gateway-grid">
+                        <a href="general-scholarship/index.html" class="gateway-card">
+                            <span class="card-icon">&#127775;</span>
+                            <h5>General Category</h5>
+                            <p>Open merit aid and EWS fee waivers.</p>
+                            <span class="card-cta">Explore &rsaquo;</span>
+                        </a>
+                        <a href="sc-scholarship/index.html" class="gateway-card">
+                            <span class="card-icon">&#127775;</span>
+                            <h5>SC Category</h5>
+                            <p>Post-matric stipends and higher education grants.</p>
+                            <span class="card-cta">Explore &rsaquo;</span>
+                        </a>
+                        <a href="st-scholarship/index.html" class="gateway-card">
+                            <span class="card-icon">&#127775;</span>
+                            <h5>ST Category</h5>
+                            <p>Tribal welfare portal funding and overseas programs.</p>
+                            <span class="card-cta">Explore &rsaquo;</span>
+                        </a>
+                        <a href="obc-scholarship/index.html" class="gateway-card">
+                            <span class="card-icon">&#127775;</span>
+                            <h5>OBC Category</h5>
+                            <p>OBC post-matric reimbursement schemes.</p>
+                            <span class="card-cta">Explore &rsaquo;</span>
+                        </a>
+                        <a href="minority-scholarship/index.html" class="gateway-card">
+                            <span class="card-icon">&#127775;</span>
+                            <h5>Minority Groups</h5>
+                            <p>NSP minority community grants.</p>
+                            <span class="card-cta">Explore &rsaquo;</span>
+                        </a>
+                        <a href="girls-scholarship/index.html" class="gateway-card">
+                            <span class="card-icon">&#127775;</span>
+                            <h5>Girls Scholarships</h5>
+                            <p>Pragati Girls, Gaon Ki Beti, and female aid.</p>
+                            <span class="card-cta">Explore &rsaquo;</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NEW SECTION: Featured Popular Scholarships -->
+        <section class="section popular-section">
+            <h3 class="section-title">Popular Scholarship Schemes</h3>
+            <p class="section-subtitle">Quick-access gateway to the most applied public scholarships in India.</p>
+            <div class="popular-grid">
+                <a href="s2-scholarship/index.html" class="popular-card">
+                    <span class="popular-badge">Central</span>
+                    <h5>NMMSS Scheme</h5>
+                    <p class="benefit">₹12,000 / year</p>
+                    <p class="summary">Scholarships for meritorious Class 9-12 students.</p>
+                    <span class="btn-link">View Details &rsaquo;</span>
+                </a>
+                <a href="s6-scholarship/index.html" class="popular-card">
+                    <span class="popular-badge">State</span>
+                    <h5>MMVY MP</h5>
+                    <p class="benefit">Full Tuition Fee</p>
+                    <p class="summary">Madhya Pradesh government scheme for meritorious board qualifiers.</p>
+                    <span class="btn-link">View Details &rsaquo;</span>
+                </a>
+                <a href="s9-scholarship/index.html" class="popular-card">
+                    <span class="popular-badge">State</span>
+                    <h5>Gaon Ki Beti</h5>
+                    <p class="benefit">₹5,000 - ₹7,500</p>
+                    <p class="summary">Empowerment benefits for rural girl students pursuing degrees.</p>
+                    <span class="btn-link">View Details &rsaquo;</span>
+                </a>
+                <a href="s13-scholarship/index.html" class="popular-card">
+                    <span class="popular-badge">Central</span>
+                    <h5>AICTE Pragati</h5>
+                    <p class="benefit">₹50,000 / year</p>
+                    <p class="summary">AICTE specialized grants for girls studying technical degrees.</p>
+                    <span class="btn-link">View Details &rsaquo;</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- NEW SECTION: Knowledge Hub Previews -->
+        <section class="section knowledge-section">
+            <h3 class="section-title">Student Educational Guides</h3>
+            <p class="section-subtitle">Equip yourself with verified insights, portal guidelines, and expert application checklists.</p>
+            <div class="knowledge-grid">
+                <div class="knowledge-card">
+                    <span class="icon">&#128221;</span>
+                    <h4>How to Apply Guide</h4>
+                    <p>Learn the exact 5-step registration process on official central and state scholarship portals.</p>
+                    <a href="guides/how-to-apply/index.html" class="read-more">Read Guide &rsaquo;</a>
+                </div>
+                <div class="knowledge-card">
+                    <span class="icon">&#128203;</span>
+                    <h4>Documents Required</h4>
+                    <p>Ensure you have all digitally verified signature certificates, fees, and passbooks ready.</p>
+                    <a href="guides/documents-required/index.html" class="read-more">Read Guide &rsaquo;</a>
+                </div>
+                <div class="knowledge-card">
+                    <span class="icon">&#128276;</span>
+                    <h4>Aadhaar e-KYC Steps</h4>
+                    <p>Avoid the number one reason for application rejections by linking Aadhaar e-KYC correctly.</p>
+                    <a href="guides/aadhaar-ekyc/index.html" class="read-more">Read Guide &rsaquo;</a>
+                </div>
+                <div class="knowledge-card">
+                    <span class="icon">&#128197;</span>
+                    <h4>Renewal Process</h4>
+                    <p>Find out the exact criteria (marks and attendance limits) needed to secure your recurring benefits.</p>
+                    <a href="guides/renewal-process/index.html" class="read-more">Read Guide &rsaquo;</a>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 24px;">
+                <a href="guides/state-scholarship-portals/index.html" class="btn btn-secondary">Explore All Guides &rsaquo;</a>
+            </div>
+        </section>
+
+        <!-- CREDIBILITY MODULE -->
+        <section class="section credibility-section">
+            <h3 class="section-title">Why Students Trust Scholar Slop</h3>
+            <p class="section-subtitle">Built on transparency, verified sources, and student-first principles.</p>
+            <div class="credibility-grid">
+                <div class="credibility-card">
+                    <div class="cred-icon">&#10003;&#65039;</div>
+                    <h4>Verified Official Sources</h4>
+                    <p>Every scholarship listed is cross-referenced directly against NSP, State DBT portals, UGC, and AICTE official notifications.</p>
+                    <a href="sources/index.html" class="cred-link">View Sources &#8250;</a>
+                </div>
+                <div class="credibility-card">
+                    <div class="cred-icon">&#128260;</div>
+                    <h4>Periodically Updated</h4>
+                    <p>Scholarship deadlines, benefit amounts, and eligibility criteria are monitored and revised against public portal announcements.</p>
+                    <a href="editorial-policy/index.html" class="cred-link">Our Process &#8250;</a>
+                </div>
+                <div class="credibility-card">
+                    <div class="cred-icon">&#128274;</div>
+                    <h4>Zero Server Storage</h4>
+                    <p>Your profile, income, and bookmarks live exclusively in your browser's LocalStorage. Nothing is uploaded or shared.</p>
+                    <a href="privacy-policy/index.html" class="cred-link">Privacy Policy &#8250;</a>
+                </div>
+                <div class="credibility-card">
+                    <div class="cred-icon">&#128170;</div>
+                    <h4>100% Free. No Middleman.</h4>
+                    <p>No application fees, no login selling, and no affiliations. We guide students directly to official government portals.</p>
+                    <a href="about/index.html" class="cred-link">About Us &#8250;</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- STREAMLINED FAQ SECTION -->
+        <section class="section faq-section">
+            <h3 class="section-title">Frequently Asked Questions</h3>
+            <p class="section-subtitle">Quick answers to common questions. Access our dedicated FAQ centers below for detailed topic lists.</p>
+            
+            <div class="faq-accordion-container">
+                <div class="faq-accordion-item">
+                    <button class="faq-accordion-trigger" onclick="app.toggleFaq(event)">
+                        <span>How do I search for scholarships matching my profile?</span>
+                        <span class="faq-icon">&#43;</span>
+                    </button>
+                    <div class="faq-accordion-content">
+                        <p>Simply enter your domicile state, community category, education level, and family income in our eligibility search tool at the top of this homepage. The system will cross-reference state and central parameters to instantly display your matching schemes.</p>
+                    </div>
+                </div>
+
+                <div class="faq-accordion-item">
+                    <button class="faq-accordion-trigger" onclick="app.toggleFaq(event)">
+                        <span>Is my student profile data secure on this platform?</span>
+                        <span class="faq-icon">&#43;</span>
+                    </button>
+                    <div class="faq-accordion-content">
+                        <p>Yes, 100%! We believe in absolute privacy. We do not store, track, or upload your academic profile, income limits, or bookmarks to any server. All inputs are saved exclusively on your local device via LocalStorage, ensuring zero risk of data exposure.</p>
+                    </div>
+                </div>
+
+                <div class="faq-accordion-item">
+                    <button class="faq-accordion-trigger" onclick="app.toggleFaq(event)">
+                        <span>How can I print my required documents checklist?</span>
+                        <span class="faq-icon">&#43;</span>
+                    </button>
+                    <div class="faq-accordion-content">
+                        <p>Click on any scholarship card to view its detailed page, and navigate to the Documents Required section. Clicking the "Download Documents Checklist" button generates a premium, printable, and offline-compatible PDF checklist instantly inside your browser.</p>
+                    </div>
+                </div>
+
+                <div class="faq-accordion-item">
+                    <button class="faq-accordion-trigger" onclick="app.toggleFaq(event)">
+                        <span>What should I do if my name differs on Aadhaar and school reports?</span>
+                        <span class="faq-icon">&#43;</span>
+                    </button>
+                    <div class="faq-accordion-content">
+                        <p>Minor spelling variations can trigger automated portal verification rejections. We recommend getting your Aadhaar credentials corrected at your local e-Mitra or Aadhaar center to match your Class 10/12 board certificate before submitting applications.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 32px;">
+                <a href="faq/index.html" class="btn btn-secondary">Visit Curated FAQ Center &rsaquo;</a>
+            </div>
+        </section>
+    </template>
+
+    <!-- List View Template -->
+    <template id="view-list">
+        <header class="list-header">
+            <button class="btn btn-text" onclick="app.showHome()">← Back</button>
+            <h2 id="list-greeting">Hello Student,</h2>
+            <p id="list-subtitle">Here are scholarships matching your profile.</p>
+        </header>
+
+        <!-- Search and Filter Toolbar -->
+        <section class="results-toolbar">
+            <div class="search-bar">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="search-input" placeholder="Search by name or keyword..."
+                    oninput="app.handleResultsSearch()">
+            </div>
+
+            <div class="filter-controls">
+                <!-- Row 1: Sorting -->
+                <div class="toolbar-row sorting-row">
+                    <div class="control-group">
+                        <label for="sort-deadline">Sort by Deadline:</label>
+                        <select id="sort-deadline" onchange="app.handleResultsFilterSort()">
+                            <option value="none">None</option>
+                            <option value="asc">Soonest First</option>
+                            <option value="desc">Latest First</option>
+                        </select>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="sort-amount">Sort by Amount:</label>
+                        <select id="sort-amount" onchange="app.handleResultsFilterSort()">
+                            <option value="none">None</option>
+                            <option value="desc">High to Low</option>
+                            <option value="asc">Low to High</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Row 2: Actions & Info -->
+                <div class="toolbar-row actions-row">
+                    <div class="control-group">
+                        <span id="results-count" class="results-count">0 found</span>
+                    </div>
+
+                    <div class="control-group checkbox-group">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="filter-open-only" onchange="app.handleResultsFilterSort()">
+                            <span class="checkmark"></span>
+                            Open Only
+                        </label>
+                    </div>
+
+                    <button class="btn-clear" onclick="app.clearResultsFilters()">Clear All</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="scholarship-list" class="scholarship-grid">
+            <!-- Cards populated by JS -->
+        </section>
+        <div id="no-results" class="hidden">
+            <p>No active scholarships found matching your search and filters.</p>
+            <button class="btn btn-secondary" onclick="app.clearResultsFilters()">Clear All Filters</button>
+        </div>
+    </template>
+
+    <!-- Detail View Template -->
+    <template id="view-detail">
+        <article class="detail-container">
+            <div class="back-btn-wrapper">
+                <button class="btn btn-text" onclick="app.goBackToList()">← Back to List</button>
+            </div>
+
+            <div class="detail-layout">
+                <section class="detail-main-content">
+                    <header class="detail-header">
+                        <div class="card-badges" id="detail-badges"
+                            style="justify-content: center; margin-bottom: 16px;">
+                            <!-- Badges injected here -->
+                        </div>
+                        <h2 id="detail-name">Scholarship Name</h2>
+                        <div id="detail-urgency" class="deadline-info"
+                            style="justify-content: center; margin-bottom: 8px;">
+                        </div>
+                        <p class="meta-info" style="color: var(--text-secondary);"><span id="detail-state">State</span>
+                            • <span id="detail-category">Category</span></p>
+                    </header>
+
+                    <div class="detail-benefit-highlight">
+                        <span class="label">Total Benefit Amount</span>
+                        <span class="value" id="detail-benefit-value">₹50,000</span>
+                    </div>
+
+                    <div id="detail-notes-box" class="notes-box">
+                        <!-- Dynamic notes injected here -->
+                        <p><strong>Important Note:</strong> This scholarship prefers early applications. Ensure all
+                            documents
+                            are scanned and clear.</p>
+                    </div>
+
+                    <section class="section">
+                        <h3>Overview</h3>
+                        <p id="detail-overview">Overview text...</p>
+                    </section>
+
+                    <section class="section">
+                        <h3>Eligibility Criteria</h3>
+                        <ul id="detail-eligibility" class="checklist">
+                            <!-- Items injected here -->
+                        </ul>
+                    </section>
+
+                    <section class="section">
+                        <h3>Detailed Benefits</h3>
+                        <p id="detail-benefit">Benefit type...</p>
+                    </section>
+
+                    <section class="section">
+                        <h3>Documents Required</h3>
+                        <ul id="detail-docs" class="document-checklist">
+                            <!-- Items injected here -->
+                        </ul>
+                    </section>
+
+                    <section class="section dates-section">
+                        <div class="date-item">
+                            <span class="label">Application Start</span>
+                            <span class="value" id="detail-start">Jan 1, 2024</span>
+                        </div>
+                        <div class="date-item">
+                            <span class="label">Application Deadline</span>
+                            <span class="value highlight" id="detail-deadline">Jan 31, 2024</span>
+                        </div>
+                    </section>
+
+                    <section class="section download-section">
+                        <button class="btn-download-docs" onclick="app.downloadDocumentsList(event)"
+                            title="Download Documents Checklist">
+                            📥 Download Documents Checklist
+                        </button>
+                        <p class="download-hint">Get a printable checklist of all required documents</p>
+                    </section>
+                </section>
+
+                <aside class="detail-sidebar">
+                    <!-- Advanced Features Placeholders -->
+                    <div id="detail-tracking-placeholder"></div>
+                    <div id="detail-reminders-placeholder"></div>
+
+                    <section class="section how-to-apply">
+                        <h3>How to Apply</h3>
+                        <div class="application-steps">
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h4>Visit Portal</h4>
+                                    <p>Go to the official scholarship portal mentioned below.</p>
+                                </div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h4>Login/Register</h4>
+                                    <p>Log in with your credentials or create a new account.</p>
+                                </div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h4>Complete Profile</h4>
+                                    <p>Fill in your basic details, education, and family income.</p>
+                                </div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">4</div>
+                                <div class="step-content">
+                                    <h4>Upload Documents</h4>
+                                    <p>Attach all the required documents listed in the checklist.</p>
+                                </div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">5</div>
+                                <div class="step-content">
+                                    <h4>Submit</h4>
+                                    <p>Review your application and submit it before the deadline.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <div class="verification-box">
+                        <p>Last verified on: <span id="detail-verified">Date</span></p>
+                        <p>Source: Official government portal</p>
+                    </div>
+
+                    <div class="action-footer">
+                        <a href="#" target="_blank" id="detail-apply-btn" class="btn btn-primary btn-block btn-lg">Apply
+                            on
+                            Official
+                            Portal <span class="external-icon">↗</span></a>
+                    </div>
+                </aside>
+            </div>
+        </article>
+    </template>
+
+    <!-- Dashboard View Template (My Opportunities) -->
+    <template id="view-dashboard">
+        <header class="dashboard-header">
+            <button class="btn btn-text" onclick="app.showHome()">← Back</button>
+            <h2>🎯 My Opportunities</h2>
+            <p>Track your saved, applied, and recently viewed scholarships.</p>
+        </header>
+
+        <div class="dashboard-grid">
+            <section class="dashboard-section card">
+                <h3>🔖 Bookmarked</h3>
+                <div id="dashboard-saved-list" class="mini-list">
+                    <!-- Cards populated by JS -->
+                </div>
+            </section>
+
+            <section class="dashboard-section card">
+                <h3>📝 Application Tracking</h3>
+                <div id="dashboard-tracking-list" class="mini-list">
+                    <!-- Cards populated by JS -->
+                </div>
+            </section>
+
+            <section class="dashboard-section card">
+                <h3>🕒 Recently Viewed</h3>
+                <div id="dashboard-recent-list" class="mini-list">
+                    <!-- Cards populated by JS -->
+                </div>
+            </section>
+        </div>
+
+        <aside class="privacy-notice">
+            <p>🛡️ <strong>Privacy First:</strong> Your tracking data and bookmarks are stored only on your device.</p>
+        </aside>
+    </template>
+
+    <!-- SEO & Sitemap Directory Footer -->
+    <footer class="app-footer-seo">
+        <div class="container footer-grid footer-grid-4">
+            <div class="footer-col">
+                <h4>&#127891; Scholar Slop</h4>
+                <p style="font-size:0.85rem; color:var(--text-secondary); line-height:1.6; margin-bottom:12px;">An independent platform helping students discover verified government scholarships across India.</p>
+                <p style="font-size:0.8rem; color:var(--text-light); font-style:italic;">Information compiled from official scholarship portals.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Scholarships</h4>
+                <ul>
+                    <li><a href="mp-scholarship/index.html">Madhya Pradesh</a></li>
+                    <li><a href="maharashtra-scholarship/index.html">Maharashtra</a></li>
+                    <li><a href="uttar-pradesh-scholarship/index.html">Uttar Pradesh</a></li>
+                    <li><a href="west-bengal-scholarship/index.html">West Bengal</a></li>
+                    <li><a href="sc-scholarship/index.html">SC Category</a></li>
+                    <li><a href="girls-scholarship/index.html">Girls Scholarships</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Guides &amp; Help</h4>
+                <ul>
+                    <li><a href="guides/how-to-apply/index.html">How to Apply</a></li>
+                    <li><a href="guides/documents-required/index.html">Documents Checklist</a></li>
+                    <li><a href="guides/eligibility-requirements/index.html">Eligibility Guide</a></li>
+                    <li><a href="faq/index.html">FAQ Center</a></li>
+                    <li><a href="guides/renewal-process/index.html">Renewal Process</a></li>
+                    <li><a href="guides/common-mistakes/index.html">Common Mistakes</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="about/index.html">About Us</a></li>
+                    <li><a href="contact/index.html">Contact</a></li>
+                    <li><a href="editorial-policy/index.html">Editorial Policy</a></li>
+                    <li><a href="sources/index.html">Sources</a></li>
+                    <li><a href="privacy-policy/index.html">Privacy Policy</a></li>
+                    <li><a href="terms/index.html">Terms of Use</a></li>
+                    <li><a href="disclaimer/index.html">Disclaimer</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&#9989; Information compiled from verified official government scholarship portals. &nbsp;|&nbsp; &copy; 2026 Scholar Slop. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
