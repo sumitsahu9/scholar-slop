@@ -869,3 +869,115 @@ body.dark-mode .status-dot {
     font-family: 'Inter', sans-serif;
     letter-spacing: 0.03em;
 }
+
+/* ==========================================================================
+   PREMIUM DESIGN SYSTEM REFRESH (Glassmorphism & Glowing Hover Accents)
+   ========================================================================== */
+
+/* Smooth scroll behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom premium scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-main);
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(79, 70, 229, 0.25);
+    border-radius: 10px;
+    border: 2px solid var(--bg-main);
+    transition: background 0.3s ease;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+}
+
+/* Elegant logo image interactive zoom */
+.logo-wrapper:hover .brand-logo-img {
+    transform: rotate(6deg) scale(1.08);
+    box-shadow: 0 6px 16px rgba(79, 70, 229, 0.4);
+}
+.brand-logo-img {
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+}
+
+/* Glassmorphism adjustments for major containers */
+.card, .search-container, .gateway-card, .popular-card, .knowledge-card, .credibility-card {
+    background: rgba(255, 255, 255, 0.7) !important;
+    backdrop-filter: blur(16px) saturate(120%);
+    -webkit-backdrop-filter: blur(16px) saturate(120%);
+    border: 1px solid rgba(255, 255, 255, 0.6) !important;
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05), 
+                0 1px 3px rgba(0, 0, 0, 0.02) !important;
+    transition: transform 0.35s cubic-bezier(0.165, 0.84, 0.44, 1),
+                box-shadow 0.35s cubic-bezier(0.165, 0.84, 0.44, 1),
+                border-color 0.35s ease,
+                background-color 0.3s ease !important;
+}
+
+/* Dark mode glassmorphism */
+body.dark-mode .card, 
+body.dark-mode .search-container, 
+body.dark-mode .gateway-card, 
+body.dark-mode .popular-card, 
+body.dark-mode .knowledge-card, 
+body.dark-mode .credibility-card {
+    background: rgba(30, 41, 59, 0.5) !important;
+    backdrop-filter: blur(20px) saturate(120%);
+    -webkit-backdrop-filter: blur(20px) saturate(120%);
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    box-shadow: 0 12px 40px -12px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Glowing card hover effects */
+.gateway-card:hover, .popular-card:hover, .knowledge-card:hover, .credibility-card:hover {
+    transform: translateY(-5px) scale(1.01) !important;
+    border-color: rgba(79, 70, 229, 0.4) !important;
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    box-shadow: 0 20px 40px -15px rgba(79, 70, 229, 0.15), 
+                0 0 0 1px rgba(79, 70, 229, 0.1) !important;
+}
+
+body.dark-mode .gateway-card:hover, 
+body.dark-mode .popular-card:hover, 
+body.dark-mode .knowledge-card:hover, 
+body.dark-mode .credibility-card:hover {
+    border-color: rgba(129, 140, 248, 0.4) !important;
+    background-color: rgba(30, 41, 59, 0.8) !important;
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5), 
+                0 0 20px rgba(129, 140, 248, 0.08) !important;
+}
+
+/* Specific styling for popular cards to highlight benefits */
+.popular-card {
+    border-left: 3px solid rgba(79, 70, 229, 0.6) !important;
+}
+body.dark-mode .popular-card {
+    border-left: 3px solid rgba(129, 140, 248, 0.6) !important;
+}
+
+/* Micro-animations for buttons and interactive items */
+.btn, .btn-icon, .read-more, .card-cta, .btn-link {
+    transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+.btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(79, 70, 229, 0.35);
+}
+
+.btn-secondary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* Credibility card specific top border gradient overlay */
+.credibility-card::before {
+    height: 4px !important;
+    background: linear-gradient(90deg, var(--primary), var(--accent)) !important;
+}
