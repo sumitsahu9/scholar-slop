@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://scholarslop.org/sitemap.xml
+Sitemap: https://scholar-slop.vercel.app/sitemap.xml
